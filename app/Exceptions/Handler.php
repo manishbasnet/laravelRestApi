@@ -63,6 +63,9 @@ class Handler extends ExceptionHandler
             return $this->unauthenticated($request, $request);
         }
 
+        if ($exception instanceof AuthorizationException) {
+            return $this->errorResponse($exception->getMessage(), 403);
+        }
 
 
         return parent::render($request, $exception);
